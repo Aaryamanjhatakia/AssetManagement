@@ -1,0 +1,25 @@
+﻿@model AssetManagement.Models.AddEmployeeHavingAssetsVM
+@{
+}
+
+<h1>Assign Asset</h1>
+<form method="post" action="AssignAsset" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Employee ID</label>
+        <input type="text" class="form-control" asp-for="EmployeeId">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Asset ID</label>
+        <input type="text" class="form-control" asp-for="AssetId">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Date of Assign</label>
+        <input type="date" class="form-control" asp-for="DateOfAssign">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Request ID</label>
+        <input type="text" class="form-control" asp-for="ReqId">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

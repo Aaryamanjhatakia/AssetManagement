@@ -1,0 +1,54 @@
+﻿@model List<AssetManagement.Models.EmployeeAssetsView>
+
+<h1>Employees Having Assets</h1>
+
+
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <form class="d-flex" asp-action="Index" asp-controller="EmployeeHavingAssets">
+            <input name="searchString" class="form-control me-1" type="search" placeholder="Search" aria-label="Search" value="@ViewData["CurrentFilter"]">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col-md-6 mb-3 text-end">
+        <a asp-action="Index" class="btn btn-outline-dark">Back to Full List</a>
+    </div>
+</div>
+
+
+
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Asset ID</th>
+            <th>Asset Name</th>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Phone No</th>
+            <th>Email</th>
+            <th>Date of Request</th>
+            <th>Date of Assign</th>
+            <th>Request ID</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employeeHavingAsset in Model)
+        {
+            <tr>
+                <td>@employeeHavingAsset.AssetId</td>
+                <td>@employeeHavingAsset.AssetName</td>
+                <td>@employeeHavingAsset.EmployeeId</td>
+                <td>@employeeHavingAsset.EmployeeName</td>
+                <td>@employeeHavingAsset.PhoneNo</td>
+                <td>@employeeHavingAsset.Email</td>
+                <td>@employeeHavingAsset.DateOfRequest.ToString("dd-MM-yyyy")</td>
+                <td>@employeeHavingAsset.DateOfAssign.ToString("dd-MM-yyyy")</td>
+                <td>@employeeHavingAsset.ReqId</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,11 +1,25 @@
 ﻿@model List<AssetManagement.Models.Employee>
 
 @{
+    ViewData["Title"] = "Employees";
 }
 
 <h1>Employees</h1>
 
-<table class="table table-striped table-bordered">
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <form class="d-flex" asp-action="Index" asp-controller="Employees">
+            <input name="searchString" class="form-control me-1" type="search" placeholder="Search by Employee ID or Name" aria-label="Search" value="@ViewData["CurrentFilter"]">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col-md-6 mb-3 text-end">
+        <a asp-action="Index" class="btn btn-outline-dark">Back to Full List</a>
+    </div>
+</div>
+
+
+<table id="employeesTable" class="table table-striped table-bordered">
     <thead class="thead-dark">
         <tr>
             <th>Id</th>
@@ -16,7 +30,7 @@
             <th>Date Of Birth</th>
             <th>Department</th>
             <th>Salary</th>
-            <th> </th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -31,9 +45,12 @@
                 <td>@employee.Dob.ToString("dd-MM-yyyy")</td>
                 <td>@employee.Department</td>
                 <td>@employee.Salary</td>
-                <td><a href="@Url.Action("View", "Employees", new { EmployeeId = employee.EmployeeId })">View</a></td>
-
+                <td>
+                    <a href="@Url.Action("View", "Employees", new { EmployeeId = employee.EmployeeId })" class="btn btn-primary">View</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+

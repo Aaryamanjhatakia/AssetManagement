@@ -13,6 +13,22 @@ namespace AssetManagement.Controllers
             AssetprojContext = assetprojContext;
         }
 
+
+
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var assets = await AssetprojContext.Assets.ToListAsync();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                assets = assets.Where(n => n.AssetId.ToLower().Contains(searchString) || n.AssetName.ToLower().Contains(searchString)).ToList();
+            }
+
+            return View(assets);
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -29,6 +45,18 @@ namespace AssetManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAsset(AddAssetViewModel addAssetRequest)
         {
+            // Check if asset with the same Asset ID already exists
+            var existingAsset = await AssetprojContext.Assets
+                .FirstOrDefaultAsync(a => a.AssetId == addAssetRequest.AssetId);
+
+            if (existingAsset != null)
+            {
+                // Add a model error and return the view with the current model
+                ModelState.AddModelError("AssetId", "An asset with the same Asset ID already exists.");
+                return View(addAssetRequest);
+            }
+
+
             var asset = new Asset()
             {
                 AssetId = addAssetRequest.AssetId,
@@ -44,6 +72,10 @@ namespace AssetManagement.Controllers
 
             await AssetprojContext.Assets.AddAsync(asset);
             await AssetprojContext.SaveChangesAsync();
+
+            // Add success message to TempData
+            TempData["SuccessMessage"] = "Asset added successfully.";
+
             return RedirectToAction("AddAsset");
 
         }

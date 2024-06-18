@@ -1,42 +1,53 @@
 ﻿@model AssetManagement.Models.AddAssetViewModel
-@{
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
 }
 
 <h1>Add Asset</h1>
 <form method="post" action="AddAsset" class="mt-5">
     <div class="mb-3">
-        <label for="" class="form-label">Asset ID</label>
+        <label for="AssetId" class="form-label">Asset ID</label>
         <input type="text" class="form-control" asp-for="AssetId">
+        <span asp-validation-for="AssetId" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Name</label>
+        <label for="AssetName" class="form-label">Name</label>
         <input type="text" class="form-control" asp-for="AssetName">
+        <span asp-validation-for="AssetName" class="text-danger"></span>
     </div>
-
     <div class="mb-3">
-        <label for="" class="form-label">Model No</label>
+        <label for="ModelNo" class="form-label">Model No</label>
         <input type="text" class="form-control" asp-for="ModelNo">
+        <span asp-validation-for="ModelNo" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Serial No</label>
+        <label for="SerialNo" class="form-label">Serial No</label>
         <input type="text" class="form-control" asp-for="SerialNo">
+        <span asp-validation-for="SerialNo" class="text-danger"></span>
     </div>
-    
     <div class="mb-3">
-        <label for="" class="form-label">Make Company</label>
+        <label for="MakeCompany" class="form-label">Make Company</label>
         <input type="text" class="form-control" asp-for="MakeCompany">
+        <span asp-validation-for="MakeCompany" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Value</label>
+        <label for="Value" class="form-label">Value</label>
         <input type="number" class="form-control" asp-for="Value">
+        <span asp-validation-for="Value" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Status</label>
+        <label for="Status" class="form-label">Status</label>
         <input type="text" class="form-control" asp-for="Status">
+        <span asp-validation-for="Status" class="text-danger"></span>
     </div>
-
-
-
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

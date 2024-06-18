@@ -21,6 +21,8 @@ public partial class AssetProjectContext : DbContext
 
     public virtual DbSet<Employee> Employees { get; set; }
 
+    public virtual DbSet<EmployeeAssetsView> EmployeeAssetsViews { get; set; }
+
     public virtual DbSet<EmployeeHavingAsset> EmployeeHavingAssets { get; set; }
 
     public virtual DbSet<VwAssetRequestsAndEmployeeInfo> VwAssetRequestsAndEmployeeInfos { get; set; }
@@ -119,11 +121,11 @@ public partial class AssetProjectContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<EmployeeHavingAsset>(entity =>
+        modelBuilder.Entity<EmployeeAssetsView>(entity =>
         {
-            entity.HasKey(e => e.AssetId);
-
-            entity.ToTable("Employee_having_assets");
+            entity
+                .HasNoKey()
+                .ToView("EmployeeAssetsView");
 
             entity.Property(e => e.AssetId)
                 .HasMaxLength(50)
@@ -136,17 +138,50 @@ public partial class AssetProjectContext : DbContext
             entity.Property(e => e.DateOfAssign)
                 .HasColumnType("datetime")
                 .HasColumnName("Date_of_assign");
-            entity.Property(e => e.DateOfReq)
+            entity.Property(e => e.DateOfRequest)
                 .HasColumnType("datetime")
-                .HasColumnName("Date_of_req");
+                .HasColumnName("Date_of_request");
+            entity.Property(e => e.Email)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.EmployeeId)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("Employee_Id");
-            entity.Property(e => e.MakeCompany)
+            entity.Property(e => e.EmployeeName)
                 .HasMaxLength(50)
                 .IsUnicode(false)
-                .HasColumnName("Make_Company");
+                .HasColumnName("Employee_Name");
+            entity.Property(e => e.PhoneNo)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.ReqId)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("Req_Id");
+        });
+
+        modelBuilder.Entity<EmployeeHavingAsset>(entity =>
+        {
+            entity.HasKey(e => e.AssetId);
+
+            entity.ToTable("Employee_having_assets");
+
+            entity.Property(e => e.AssetId)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("Asset_Id");
+            entity.Property(e => e.DateOfAssign)
+                .HasColumnType("datetime")
+                .HasColumnName("Date_of_assign");
+            entity.Property(e => e.EmployeeId)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("Employee_Id");
+            entity.Property(e => e.ReqId)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("Req_Id");
         });
 
         modelBuilder.Entity<VwAssetRequestsAndEmployeeInfo>(entity =>

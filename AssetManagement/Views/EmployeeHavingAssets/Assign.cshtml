@@ -1,0 +1,37 @@
+﻿@model AssetManagement.Models.AddEmployeeHavingAssetsVM
+
+@{
+    ViewData["Title"] = "Assign Asset";
+}
+
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+
+<h1>Assign Asset</h1>
+<form method="post" action="Assign" class="mt-5">
+    <div class="mb-3">
+        <label for="EmployeeId" class="form-label">Employee ID</label>
+        <input type="text" class="form-control" asp-for="EmployeeId" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="AssetId" class="form-label">Asset ID</label>
+        <input type="text" class="form-control" asp-for="AssetId">
+    </div>
+    <div class="mb-3">
+        <label for="DateOfAssign" class="form-label">Date of Assign</label>
+        <input type="date" class="form-control" asp-for="DateOfAssign">
+    </div>
+    <div class="mb-3">
+        <label for="ReqId" class="form-label">Request ID</label>
+        <input type="text" class="form-control" asp-for="ReqId" readonly>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

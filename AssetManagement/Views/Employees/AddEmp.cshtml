@@ -1,46 +1,58 @@
 ﻿@model AssetManagement.Models.AddEmployeeViewModel
 
-@{
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
 }
 
 <h1>Add Employee</h1>
 <form method="post" action="AddEmp" class="mt-5">
     <div class="mb-3">
-        <label for="" class="form-label">Employee ID</label>
-        <input type="text" class="form-control"  asp-for="EmployeeId">
+        <label for="EmployeeId" class="form-label">Employee ID</label>
+        <input type="text" class="form-control" asp-for="EmployeeId">
+        <span asp-validation-for="EmployeeId" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Name</label>
+        <label for="EmployeeName" class="form-label">Name</label>
         <input type="text" class="form-control" asp-for="EmployeeName">
+        <span asp-validation-for="EmployeeName" class="text-danger"></span>
     </div>
-    
     <div class="mb-3">
-        <label for="" class="form-label">Phone No</label>
+        <label for="PhoneNo" class="form-label">Phone No</label>
         <input type="text" class="form-control" asp-for="PhoneNo">
+        <span asp-validation-for="PhoneNo" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">E-mail</label>
+        <label for="Email" class="form-label">E-mail</label>
         <input type="email" class="form-control" asp-for="Email">
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Address</label>
+        <label for="Address" class="form-label">Address</label>
         <input type="text" class="form-control" asp-for="Address">
+        <span asp-validation-for="Address" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Date Of Birth</label>
+        <label for="Dob" class="form-label">Date Of Birth</label>
         <input type="date" class="form-control" asp-for="Dob">
+        <span asp-validation-for="Dob" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Department</label>
+        <label for="Department" class="form-label">Department</label>
         <input type="text" class="form-control" asp-for="Department">
+        <span asp-validation-for="Department" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="" class="form-label">Salary</label>
+        <label for="Salary" class="form-label">Salary</label>
         <input type="number" class="form-control" asp-for="Salary">
+        <span asp-validation-for="Salary" class="text-danger"></span>
     </div>
-
-
-
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

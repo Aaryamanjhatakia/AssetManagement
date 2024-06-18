@@ -13,10 +13,28 @@ namespace AssetManagement.Controllers
             _context = context;
         }
 
+
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var output = await _context.VwAssetRequestsAndEmployeeInfos.ToListAsync();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                output = output.Where(n => n.ReqAssetName.ToLower().Contains(searchString) || n.EmployeeName.ToLower().Contains(searchString) || n.EmpId.ToLower().Contains(searchString)).ToList();
+            }
+
+            return View(output);
+        }
+
+
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var assetRequestInfos = await _context.VwAssetRequestsAndEmployeeInfos.ToListAsync();
+            
+            
             return View(assetRequestInfos);
         }
 
@@ -54,6 +72,14 @@ namespace AssetManagement.Controllers
         {
             // Example implementation using Guid
             return Guid.NewGuid().ToString();
+        }
+
+
+
+        public async Task<bool> IsAssetAssignedAsync(string requestId)
+        {
+            return await _context.EmployeeAssetsViews
+                .AnyAsync(ea => ea.AssetId == requestId);
         }
     }
 }

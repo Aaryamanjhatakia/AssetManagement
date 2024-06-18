@@ -38,6 +38,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXRzXFZpZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Internship/Compucare/AssetManagement/AssetManagement/Views/EmployeeHavingAssets/Assign.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVIYXZpbmdBc3NldHNcQXNzaWduLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Internship/Compucare/AssetManagement/AssetManagement/Views/EmployeeHavingAssets/AssignAsset.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVIYXZpbmdBc3NldHNcQXNzaWduQXNzZXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Internship/Compucare/AssetManagement/AssetManagement/Views/EmployeeHavingAssets/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVIYXZpbmdBc3NldHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Internship/Compucare/AssetManagement/AssetManagement/Views/Employees/AddEmp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVzXEFkZEVtcC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -10,7 +10,27 @@ namespace AssetManagement.Controllers
         public EmployeesController(AssetProjectContext assetprojContext)
         {
             AssetprojContext = assetprojContext;
+            
         }
+
+
+
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var employees = await AssetprojContext.Employees.ToListAsync();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                employees = employees.Where(n => n.EmployeeName.ToLower().Contains(searchString) || n.EmployeeId.ToLower().Contains(searchString)).ToList();
+            }
+
+            return View(employees);
+        }
+
+
+
+
 
 
         [HttpGet]
@@ -29,6 +49,18 @@ namespace AssetManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEmp(AddEmployeeViewModel addEmployeeRequest)
         {
+            // Check if employee with the same Employee ID already exists
+            var existingEmployee = await AssetprojContext.Employees
+                .FirstOrDefaultAsync(e => e.EmployeeId == addEmployeeRequest.EmployeeId);
+
+            if (existingEmployee != null)
+            {
+                // Add a model error and return the view with the current model
+                ModelState.AddModelError("EmployeeId", "An employee with the same Employee ID already exists.");
+                return View(addEmployeeRequest);
+            }
+
+
             var employee = new Employee()
             {
                 EmployeeId = addEmployeeRequest.EmployeeId,
@@ -44,6 +76,10 @@ namespace AssetManagement.Controllers
 
             await AssetprojContext.Employees.AddAsync(employee);
             await AssetprojContext.SaveChangesAsync();
+
+            // Add success message to TempData
+            TempData["SuccessMessage"] = "Employee added successfully.";
+
             return RedirectToAction("AddEmp");
 
         }
@@ -118,5 +154,8 @@ namespace AssetManagement.Controllers
             return RedirectToAction("Index");
 
         }
+
+
+        
     }
 }

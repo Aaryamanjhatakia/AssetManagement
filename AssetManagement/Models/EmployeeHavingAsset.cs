@@ -9,13 +9,7 @@ public partial class EmployeeHavingAsset
 
     public string AssetId { get; set; } = null!;
 
-    public string AssetName { get; set; } = null!;
-
-    public string MakeCompany { get; set; } = null!;
-
-    public int Value { get; set; }
-
     public DateTime DateOfAssign { get; set; }
 
-    public DateTime DateOfReq { get; set; }
+    public string ReqId { get; set; } = null!;
 }

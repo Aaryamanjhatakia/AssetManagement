@@ -5,6 +5,19 @@
 
 <h1>Assets</h1>
 
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <form class="d-flex" asp-action="Index" asp-controller="Assets">
+            <input name="searchString" class="form-control me-1" type="search" placeholder="Search by Asset ID or Name" aria-label="Search" value="@ViewData["CurrentFilter"]">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col-md-6 mb-3 text-end">
+        <a asp-action="Index" class="btn btn-outline-dark">Back to Full List</a>
+    </div>
+</div>
+
+
 <table class="table table-striped table-bordered">
     <thead class="thead-dark">
         <tr>
@@ -30,8 +43,8 @@
                 <td>@asset.MakeCompany</td>
                 <td>@asset.Value</td>
                 <td>@asset.Status</td>
-                
-                <td><a href="@Url.Action("View", "Assets", new { AssetId = asset.AssetId })">View</a></td>
+
+                <td><a href="@Url.Action("View", "Assets", new { AssetId = asset.AssetId })" class="btn btn-primary">View</a></td>
 
             </tr>
         }

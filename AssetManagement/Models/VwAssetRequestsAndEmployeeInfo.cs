@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace AssetManagement.Models;
@@ -24,4 +25,6 @@ public partial class VwAssetRequestsAndEmployeeInfo
     public string Email { get; set; } = null!;
 
     public string Department { get; set; } = null!;
+
 }
+
